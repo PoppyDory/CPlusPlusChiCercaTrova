@@ -13,7 +13,7 @@ int main()
 
     // trovare le righe contenenti la parola data
 
-    ifstream fileInput("maggio.txt"); // apertura file in lettura
+     // apertura file in lettura
     string riga;
     string parola;
     int numeroRigaParolaTrovata = 0;
@@ -22,6 +22,7 @@ int main()
 
     while (parola != "exit")
     {
+        ifstream fileInput("maggio.txt");
         cout << "inserisci parola: \n";
         cin >> parola;
         while (getline(fileInput, riga))
@@ -56,6 +57,8 @@ int main()
                 cout << "PAROLA TROVATA IN RIGA: " << numeroRigaParolaTrovata<<" - " << riga << endl;
             }
         }
+        fileInput.close();
     }
-    fileInput.close();
+    
+    
 }
