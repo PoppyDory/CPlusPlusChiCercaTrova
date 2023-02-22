@@ -14,7 +14,8 @@ int main()
     string riga;
     string parola;
     string strofa;
-    int numeroRigaParolaTrovata = 1;
+    int numeroRigaParolaTrovata = 0;
+    int trovato;
 
     while (parola != "exit")
     {
@@ -23,9 +24,10 @@ int main()
         cin >> parola;
         ifstream fileInput("maggio.txt"); // apro il file
         strofa = "";
-        numeroRigaParolaTrovata = 1;
+        numeroRigaParolaTrovata = 0;
         while (getline(fileInput, riga))
         {
+            numeroRigaParolaTrovata++;
             if (riga != "")
             {
                strofa += to_string(numeroRigaParolaTrovata)+" - "+riga + "\n";
@@ -34,7 +36,6 @@ int main()
             {
                 strofa = "";
             }
-            numeroRigaParolaTrovata++;
             bool flag = false;                      // SE TROVO LA PAROLA IMPOSTO A TRUE
             for (int i = 0; i < riga.length(); i++) // for tutta riga
             {
@@ -47,20 +48,22 @@ int main()
                         if (j == parola.length() - 1) // se le lettere sono uguali E sono all'ultima lettera della parola
                         {
                             flag = true;
-                            
+                            trovato=numeroRigaParolaTrovata;
+                            cout <<"La strofa in cui ho trovato la parola e': "<< endl<<strofa;
                             while (getline(fileInput, riga))
                             {
+                                numeroRigaParolaTrovata++;
                                 if (riga == "")
                                 {
                                     break;
                                 }
                                 else
                                 {
-                                    strofa += to_string(numeroRigaParolaTrovata)+" - "+riga + "\n";
+                                    cout<< numeroRigaParolaTrovata<<" - "<<riga << "\n";
                                 }
-                                numeroRigaParolaTrovata++;
+                                
                             }
-                            cout << strofa;                          
+                                                     
                         }
                          
                         i++;
@@ -72,10 +75,10 @@ int main()
                 }
             }
 
-            /*if (flag)
+            if (flag)
             {
-                cout << "PAROLA TROVATA IN RIGA: " << numeroRigaParolaTrovata << " - " << riga << endl;
-            }*/
+                cout << "PAROLA TROVATA IN RIGA: " << trovato << endl << "---------------"<<endl;
+            }
         }
         fileInput.close();
     }
